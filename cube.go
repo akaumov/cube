@@ -23,7 +23,7 @@ type Message struct {
 }
 
 type HandlerInterface interface {
-	OnStart(instance *Cube)
-	OnStop(instance *Cube)
-	OnReceiveMessage(instance *Cube, message *Message)
+	OnStart(instance Cube)
+	OnStop(instance Cube)
+	OnReceiveMessage(instance Cube, message Message)
 }
