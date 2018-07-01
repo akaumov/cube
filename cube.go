@@ -28,7 +28,7 @@ type Cube interface {
 	GetClass() string
 	GetInstanceId() string
 
-	PublishMessage(toChannel string, message Message) error
+	PublishMessage(channel string, message Message) error
 	MakeRequest(channel string, message Message, timeout time.Duration) error
 
 	LogDebug(text string) error
@@ -42,6 +42,6 @@ type Cube interface {
 type HandlerInterface interface {
 	OnStart(instance Cube)
 	OnStop(instance Cube)
-	OnReceiveMessage(instance Cube, message Message)
-	OnReceiveRequest(instance Cube, message Message, replyToRequest func(Message) error)
+	OnReceiveMessage(instance Cube, channel string, message Message)
+	OnReceiveRequest(instance Cube, channel string, message Message, replyToRequest func(Message) error)
 }
