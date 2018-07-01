@@ -14,6 +14,15 @@ type Message struct {
 	Params  json.RawMessage `json:"params"`
 }
 
+type LogMessage struct {
+	Version    string `json:"version"`
+	Id         string `json:"id"`
+	Class      string `json:"class"`
+	InstanceId string `json:"instanceId"`
+	Level      string `json:"level"`
+	Text       string `json:"text"`
+}
+
 type Cube interface {
 	GetParams() map[string]string
 	GetClass() string
