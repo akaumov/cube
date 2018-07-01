@@ -14,8 +14,8 @@ type Message struct {
 	Params  json.RawMessage `json:"params"`
 }
 
-type LogMessage struct {
-	Version    string `json:"version"`
+type LogMessageParams struct {
+	Time       int64  `json:"time"`
 	Id         string `json:"id"`
 	Class      string `json:"class"`
 	InstanceId string `json:"instanceId"`
