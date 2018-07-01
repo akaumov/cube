@@ -27,15 +27,16 @@ type Cube interface {
 	GetParams() map[string]string
 	GetClass() string
 	GetInstanceId() string
-	PublishMessage(toChannel string, message Message)
-	MakeRequest(channel string, message Message, timeout time.Duration)
 
-	LogDebug(text string)
-	LogError(text string)
-	LogFatal(text string)
-	LogInfo(text string)
-	LogWarning(text string)
-	LogTrace(text string)
+	PublishMessage(toChannel string, message Message) error
+	MakeRequest(channel string, message Message, timeout time.Duration) error
+
+	LogDebug(text string) error
+	LogError(text string) error
+	LogFatal(text string) error
+	LogInfo(text string) error
+	LogWarning(text string) error
+	LogTrace(text string) error
 }
 
 type HandlerInterface interface {
