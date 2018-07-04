@@ -3,6 +3,11 @@ package cube
 import (
 	"time"
 	"encoding/json"
+	"errors"
+)
+
+var (
+	ErrorTimeout = errors.New("cube: request timeout")
 )
 
 type Message struct {
@@ -24,12 +29,12 @@ type LogMessageParams struct {
 }
 
 type Cube interface {
-	GetParams() map[string]string
+	GetParam(param string) string
 	GetClass() string
 	GetInstanceId() string
 
 	PublishMessage(channel string, message Message) error
-	MakeRequest(channel string, message Message, timeout time.Duration) error
+	MakeRequest(channel string, message Message, timeout time.Duration) (Message, error)
 
 	LogDebug(text string) error
 	LogError(text string) error
