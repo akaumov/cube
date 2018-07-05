@@ -11,21 +11,30 @@ var (
 )
 
 type Message struct {
-	Version string          `json:"version"`
-	Id      string          `json:"id"`
-	From    string          `json:"from"`
-	To      string          `json:"to"`
-	Method  string          `json:"method"`
-	Params  json.RawMessage `json:"params"`
+	Version string           `json:"version"`
+	Id      *string          `json:"id"`
+	Method  string           `json:"method"`
+	Params  *json.RawMessage `json:"params"`
 }
 
-type LogMessageParams struct {
-	Time       int64  `json:"time"`
-	Id         string `json:"id"`
-	Class      string `json:"class"`
-	InstanceId string `json:"instanceId"`
-	Level      string `json:"level"`
-	Text       string `json:"text"`
+type Error struct {
+	Code        string           `json:"name"`
+	Name        string           `json:"name"`
+	Description string           `json:"name"`
+	Data        *json.RawMessage `json:"data"`
+}
+
+type Request struct {
+	Version string           `json:"version"`
+	Method  string           `json:"method"`
+	Params  *json.RawMessage `json:"params"`
+}
+
+type Response struct {
+	Version string           `json:"version"`
+	Id      string           `json:"id"`
+	Result  *json.RawMessage `json:"result"`
+	Errors  *[]Error         `json:"errors"`
 }
 
 type Cube interface {
@@ -34,7 +43,7 @@ type Cube interface {
 	GetInstanceId() string
 
 	PublishMessage(channel string, message Message) error
-	MakeRequest(channel string, message Message, timeout time.Duration) (Message, error)
+	CallMethod(channel string, request Request , timeout time.Duration) (Response, error)
 
 	LogDebug(text string) error
 	LogError(text string) error
