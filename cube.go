@@ -42,7 +42,7 @@ type Cube interface {
 	GetInstanceId() string
 
 	PublishMessage(channel string, message Message) error
-	CallMethod(channel string, request Request, timeout time.Duration) (Response, error)
+	CallMethod(channel string, request Request, timeout time.Duration) (*Response, error)
 
 	LogDebug(text string) error
 	LogError(text string) error
