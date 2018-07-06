@@ -56,5 +56,5 @@ type HandlerInterface interface {
 	OnStart(instance Cube)
 	OnStop(instance Cube)
 	OnReceiveMessage(instance Cube, channel string, message Message)
-	OnReceiveRequest(instance Cube, channel string, message Message, replyToRequest func(Message) error)
+	OnReceiveRequest(instance Cube, channel string, request Request) (*Response, error)
 }
