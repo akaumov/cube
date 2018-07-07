@@ -36,6 +36,8 @@ type Response struct {
 	Errors  *[]Error         `json:"errors"`
 }
 
+type InputChannel string
+
 type Cube interface {
 	GetParam(param string) string
 	GetClass() string
@@ -43,6 +45,8 @@ type Cube interface {
 
 	PublishMessage(channel string, message Message) error
 	CallMethod(channel string, request Request, timeout time.Duration) (*Response, error)
+
+	Stop()
 
 	LogDebug(text string) error
 	LogError(text string) error
@@ -53,7 +57,7 @@ type Cube interface {
 }
 
 type HandlerInterface interface {
-	OnStart(instance Cube)
+	OnStart(instance Cube) ([]InputChannel, error)
 	OnStop(instance Cube)
 	OnReceiveMessage(instance Cube, channel string, message Message)
 	OnReceiveRequest(instance Cube, channel string, request Request) (*Response, error)
