@@ -57,7 +57,8 @@ type Cube interface {
 }
 
 type HandlerInterface interface {
-	OnStart(instance Cube) ([]InputChannel, error)
+	OnInitInstance() []InputChannel
+	OnStart(instance Cube)
 	OnStop(instance Cube)
 	OnReceiveMessage(instance Cube, channel string, message Message)
 	OnReceiveRequest(instance Cube, channel string, request Request) (*Response, error)
