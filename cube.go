@@ -28,11 +28,11 @@ type Response struct {
 }
 
 type Error struct {
-	Name    string           `json:"name"`
-	Message string           `json:"description"`
+	Name    string `json:"name"`
+	Message string `json:"description"`
 }
 
-func NewResultResponse(requestId string, name string, message string, result *json.RawMessage) Response {
+func NewResultResponse(requestId string, result *json.RawMessage) Response {
 	return Response{
 		Id:     requestId,
 		Result: result,
